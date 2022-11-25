@@ -1,5 +1,6 @@
-import logo from "../utils/Mercury-logotype.svg";
-import avatar from "../utils/avatar.jpeg";
+import logo from "../images/Mercury-logotype.svg";
+import avatar from "../images/avatar.jpeg";
+import door from '../images/door.png'
 
 function LoggedScreen() {
   return (
@@ -10,7 +11,7 @@ function LoggedScreen() {
           <div className="greeting">
             <img src={avatar} alt="user" className="avatar" />
             <h1>That's it, Elon!</h1>
-            <button className="btn-log">🚪 Logout</button>
+            <button className="btn-log"> <img src={door} alt="door" /> Logout</button>
           </div>
         </div>
       </div>

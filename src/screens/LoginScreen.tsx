@@ -1,14 +1,28 @@
-import logo from "../utils/Mercury-logotype.svg";
+import { DataContext } from "../context/ContextProvider";
+import logo from "../images/Mercury-logotype.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-type FormValues = {
-  password: string;
-  email: string;
-};
+import { loginData, credentialState } from "../types/loginTypes";
+import arrow from "../images/arrow.png";
+import { useState, useEffect, useContext } from "react";
+import { login } from "../api/index";
 
 function LoginScreen() {
-  const { register, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const { credentials, setCredentials } = useContext(
+    DataContext
+  ) as credentialState;
+
+  //const [token, setToken] = useState<loginData>({ password: "", email: "" });
+  const { register, handleSubmit } = useForm<loginData>();
+  const onSubmit: SubmitHandler<loginData> = (data) => setCredentials(data);
+
+  useEffect(() => {
+    async function API() {
+      const response = await login(credentials);
+      //console.log(response);
+    }
+    API();
+  }, [onSubmit]);
+
   return (
     <>
       <div className="container">
@@ -23,21 +37,31 @@ function LoginScreen() {
           <div>
             <form onSubmit={handleSubmit(onSubmit)} className="form">
               <input
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                })}
                 type="email"
                 className="input"
                 placeholder="Email"
               />
 
               <input
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Field required!",
+                  },
+                })}
                 type="password"
                 className="input"
                 placeholder="Password"
               />
 
               <button type="submit" value="submit" className="btn-log">
-                Login ➡
+                Login <img src={arrow} alt="arrow"></img>
               </button>
             </form>
           </div>
