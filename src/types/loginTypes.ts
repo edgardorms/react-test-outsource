@@ -5,7 +5,7 @@ export type loginData = {
 
 export type UserState = {
   user: boolean;
-  setUser: boolean;
+  setUser: (open: boolean) => void;
   prevState: null;
 };
 

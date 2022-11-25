@@ -85,6 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 
   gap: 40px;
 
@@ -92,32 +93,13 @@ body {
   height: 224px;
 }
 
-.input {
+.input-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 12px 12px 16px;
 
-  width: 240px;
-  height: 48px;
-
-  background: rgba(165, 174, 189, 0.1);
-
-  border: 1px solid rgba(165, 174, 189, 0.2);
-  border-radius: 12px;
-
-  align-self: stretch;
-
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  outline: none;
-
-
-  color: rgba(29, 31, 38, 0.8);
+ 
 }
 .input:hover {
   border: 2px solid rgba(47, 123, 255, 1);
@@ -213,4 +195,84 @@ body {
   line-height: 32px;
   text-align: center;
   color: rgba(29, 31, 38, 0.8);
+}
+
+.error-msg {
+  /* Paragraph/P6 */
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  /* identical to box height, or 154% */
+
+  margin: 0px;
+
+  /* Negative/Alpha_100 */
+
+  color: #ff0044;
+}
+.input-error {
+ 
+  padding: 12px 12px 12px 16px;
+
+  width: 240px;
+  height: 48px;
+
+  background: rgba(165, 174, 189, 0.1);
+  border: 2px solid rgba(255, 0, 68, 1);
+  border-radius: 12px;
+
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+  color: rgba(29, 31, 38, 0.8);
+}
+.form-error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  width: 240px;
+  height: 224px;
+}
+.hidden {
+  display: none;
+}
+
+.input{
+  width: 240px;
+  height: 48px;
+
+  background: rgba(165, 174, 189, 0.1);
+
+  border: 1px solid rgba(165, 174, 189, 0.2);
+  border-radius: 12px;
+
+  align-self: stretch;
+
+  font-family: "Inter";
+  font-style: normal; 
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+
+  color: rgba(29, 31, 38, 0.8);
+
+}
+
+.cross{
+  position: absolute;
+  padding: 12px;
+  padding-left: 200px;
+  pointer-events: none;
 }

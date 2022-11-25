@@ -1,27 +1,35 @@
 import { DataContext } from "../context/ContextProvider";
 import logo from "../images/Mercury-logotype.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { loginData, credentialState } from "../types/loginTypes";
+import { loginData, credentialState, UserState } from "../types/loginTypes";
 import arrow from "../images/arrow.png";
 import { useState, useEffect, useContext } from "react";
 import { login } from "../api/index";
+import errorLogo from "../images/error.png";
 
 function LoginScreen() {
+  const [error, setError] = useState(false);
   const { credentials, setCredentials } = useContext(
     DataContext
   ) as credentialState;
 
-  //const [token, setToken] = useState<loginData>({ password: "", email: "" });
-  const { register, handleSubmit } = useForm<loginData>();
-  const onSubmit: SubmitHandler<loginData> = (data) => setCredentials(data);
+  const { user, setUser } = useContext(DataContext) as UserState;
 
-  useEffect(() => {
-    async function API() {
-      const response = await login(credentials);
-      //console.log(response);
-    }
-    API();
-  }, [onSubmit]);
+  const { register, handleSubmit } = useForm<loginData>();
+  const onSubmit: SubmitHandler<loginData> = async (data) => {
+    setCredentials(data);
+    const response = await login(credentials);
+
+    if (response.error) {
+      setError(true);
+      console.log(response.error);
+    } else setUser(true);
+  };
+
+  // useEffect(() => {
+
+  //   API();
+  // }, [onSubmit]);
 
   return (
     <>
@@ -35,30 +43,57 @@ function LoginScreen() {
             </p>
           </div>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="form">
-              <input
-                {...register("email", {
-                  required: {
-                    value: true,
-                    message: "Field required!",
-                  },
-                })}
-                type="email"
-                className="input"
-                placeholder="Email"
-              />
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className={error ? "form-error" : "form"}
+            >
+              <div>
+                <div
+                  className={
+                    error ? "input-container-error" : "input-container"
+                  }
+                >
+                  <input
+                    {...register("email", {
+                      required: true,
+                    })}
+                    type="email"
+                    className="input-error"
+                    placeholder="Email"
+                  />
+                  <img
+                    src={errorLogo}
+                    className={error ? "cross" : "hidden"}
+                  ></img>
+                </div>
 
-              <input
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Field required!",
-                  },
-                })}
-                type="password"
-                className="input"
-                placeholder="Password"
-              />
+                <h6 className={error ? "error-msg" : "hidden"}>
+                  Incorrect email
+                </h6>
+              </div>
+              <div>
+                <div
+                  className={
+                    error ? "input-container-error" : "input-container"
+                  }
+                >
+                  <input
+                    {...register("password", {
+                      required: true,
+                    })}
+                    type="password"
+                    className="input-error"
+                    placeholder="Password"
+                  />
+                  <img
+                    src={errorLogo}
+                    className={error ? "cross" : "hidden"}
+                  ></img>
+                </div>
+                <h6 className={error ? "error-msg" : "hidden"}>
+                  Incorrect password
+                </h6>
+              </div>
 
               <button type="submit" value="submit" className="btn-log">
                 Login <img src={arrow} alt="arrow"></img>
