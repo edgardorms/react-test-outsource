@@ -3,10 +3,10 @@ import {DataContext} from './context/ContextProvider';
 import LoggedScreen from "./screens/LoggedScreen";
 import LoginScreen from "./screens/LoginScreen";
 import { joinClassNames } from "./utils/joinClassNames";
-import {UserState, credentialState} from './types/loginTypes'
+import {userState, credentialState} from './types/loginTypes'
 
 function App() {
-  const { user, setUser} = useContext(DataContext) as UserState
+  const { user, setUser} = useContext(DataContext) as userState
   
   //let classBtn = joinClassNames(["lmn-button", "lmn-button-primary"]);
   return user ? <LoggedScreen /> : <LoginScreen />;

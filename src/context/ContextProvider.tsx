@@ -1,15 +1,15 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { UserState, loginData, credentialState } from "../types/loginTypes";
+import { userState, loginData, credentialState, errorState } from "../types/loginTypes";
 
-const initialState: credentialState ={
+const initialState: credentialState = {
   credentials: {
     password: "",
-    email: ""
+    email: "",
   },
   setCredentials: function (value: loginData): void {
     throw new Error("Function not implemented.");
-  }
-}
+  },
+};
 
 export const DataContext = createContext({});
 
@@ -18,13 +18,15 @@ interface props {
 }
 
 export const DataContextProvider = ({ children }: props) => {
-  
   const [credentials, setCredentials] = useState<credentialState>(initialState);
 
-  const [user, setUser] = useState<UserState | null>(null);
+  const [user, setUser] = useState<userState | null>(null);
+  const [error, setError] = useState<errorState | null>(null);
 
   return (
-    <DataContext.Provider value={{ user, setUser, credentials, setCredentials }}>
+    <DataContext.Provider
+      value={{ user, setUser, credentials, setCredentials, error, setError }}
+    >
       {children}
     </DataContext.Provider>
   );

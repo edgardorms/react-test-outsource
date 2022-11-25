@@ -1,14 +1,16 @@
 import logo from "../images/Mercury-logotype.svg";
 import avatar from "../images/avatar.jpeg";
 import door from '../images/door.png'
-import { UserState } from "../types/loginTypes";
+import { errorState, userState } from "../types/loginTypes";
 import { useContext } from "react";
 import { DataContext } from "../context/ContextProvider";
 
 function LoggedScreen() {
-  const { user, setUser } = useContext(DataContext) as UserState;
+  const { user, setUser } = useContext(DataContext) as userState;
+  const {error, setError} = useContext(DataContext) as errorState
   function Logout() {
     setUser(false)
+    setError(false)
   }
   return (
     <>

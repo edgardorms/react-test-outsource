@@ -1,19 +1,19 @@
 import { DataContext } from "../context/ContextProvider";
 import logo from "../images/Mercury-logotype.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { loginData, credentialState, UserState } from "../types/loginTypes";
+import { loginData, credentialState, userState, errorState } from "../types/loginTypes";
 import arrow from "../images/arrow.png";
 import { useState, useEffect, useContext } from "react";
 import { login } from "../api/index";
 import errorLogo from "../images/error.png";
 
 function LoginScreen() {
-  const [error, setError] = useState(false);
   const { credentials, setCredentials } = useContext(
     DataContext
   ) as credentialState;
 
-  const { user, setUser } = useContext(DataContext) as UserState;
+  const { user, setUser } = useContext(DataContext) as userState;
+  const {error, setError} = useContext(DataContext) as errorState
 
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
@@ -49,16 +49,14 @@ function LoginScreen() {
             >
               <div>
                 <div
-                  className={
-                    error ? "input-container-error" : "input-container"
-                  }
+                  className="input-container"
                 >
                   <input
                     {...register("email", {
                       required: true,
                     })}
                     type="email"
-                    className="input-error"
+                    className={error ? "input-error" : "input"}
                     placeholder="Email"
                   />
                   <img
@@ -73,16 +71,14 @@ function LoginScreen() {
               </div>
               <div>
                 <div
-                  className={
-                    error ? "input-container-error" : "input-container"
-                  }
+                  className="input-container"
                 >
                   <input
                     {...register("password", {
                       required: true,
                     })}
                     type="password"
-                    className="input-error"
+                    className={error ? "input-error" : "input"}
                     placeholder="Password"
                   />
                   <img
