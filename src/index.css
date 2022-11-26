@@ -80,32 +80,6 @@ body {
 
   color: rgba(29, 31, 38, 0.8);
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 40px;
-
-  width: 240px;
-  height: 224px;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-}
-.input:hover {
-  border: 2px solid rgba(47, 123, 255, 1);
-}
-.input:focus {
-  border: 2px solid rgba(47, 123, 255, 1);
-}
-
 .btn-log {
   display: flex;
   flex-direction: row;
@@ -194,6 +168,25 @@ body {
   text-align: center;
   color: rgba(29, 31, 38, 0.8);
 }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  width: 240px;
+  height: 224px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .error-msg {
   /* Paragraph/P6 */
@@ -249,7 +242,6 @@ body {
   height: 48px;
   padding: 12px 12px 12px 16px;
 
-
   background: rgba(165, 174, 189, 0.1);
 
   border: 1px solid rgba(165, 174, 189, 0.2);
@@ -265,6 +257,13 @@ body {
   outline: none;
 
   color: rgba(29, 31, 38, 0.8);
+}
+
+.input:hover {
+  border: 2px solid rgba(47, 123, 255, 1);
+}
+.input:focus {
+  border: 2px solid rgba(47, 123, 255, 1);
 }
 
 .cross {

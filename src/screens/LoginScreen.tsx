@@ -1,9 +1,15 @@
 import { DataContext } from "../context/ContextProvider";
 import logo from "../images/Mercury-logotype.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { loginData, credentialState, userState, errorState } from "../types/loginTypes";
+import {
+  loginData,
+  credentialState,
+  userState,
+  errorState,
+  dataUserState,
+} from "../types/loginTypes";
 import arrow from "../images/arrow.png";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { login } from "../api/index";
 import errorLogo from "../images/error.png";
 
@@ -13,7 +19,10 @@ function LoginScreen() {
   ) as credentialState;
 
   const { user, setUser } = useContext(DataContext) as userState;
-  const {error, setError} = useContext(DataContext) as errorState
+  const { error, setError } = useContext(DataContext) as errorState;
+  const { dataLogged, setDataLogged } = useContext(
+    DataContext
+  ) as dataUserState;
 
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
@@ -23,7 +32,12 @@ function LoginScreen() {
     if (response.error) {
       setError(true);
       console.log(response.error);
-    } else setUser(true);
+    } else {
+      setUser(true);
+      setDataLogged(response);
+      console.log(dataLogged);
+      console.log(response);
+    }
   };
 
   // useEffect(() => {
@@ -48,9 +62,7 @@ function LoginScreen() {
               className={error ? "form-error" : "form"}
             >
               <div>
-                <div
-                  className="input-container"
-                >
+                <div className="input-container">
                   <input
                     {...register("email", {
                       required: true,
@@ -70,9 +82,7 @@ function LoginScreen() {
                 </h6>
               </div>
               <div>
-                <div
-                  className="input-container"
-                >
+                <div className="input-container">
                   <input
                     {...register("password", {
                       required: true,

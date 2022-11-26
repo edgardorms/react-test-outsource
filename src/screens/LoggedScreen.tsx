@@ -1,16 +1,21 @@
 import logo from "../images/Mercury-logotype.svg";
-import avatar from "../images/avatar.jpeg";
-import door from '../images/door.png'
-import { errorState, userState } from "../types/loginTypes";
+import door from "../images/door.png";
+import { errorState, userState, dataUserState } from "../types/loginTypes";
 import { useContext } from "react";
 import { DataContext } from "../context/ContextProvider";
 
 function LoggedScreen() {
   const { user, setUser } = useContext(DataContext) as userState;
-  const {error, setError} = useContext(DataContext) as errorState
+  const { error, setError } = useContext(DataContext) as errorState;
+  const { dataLogged, setDataLogged } = useContext(
+    DataContext
+  ) as dataUserState;
+
+  const userLogged = dataLogged.data;
   function Logout() {
-    setUser(false)
-    setError(false)
+    setUser(false);
+    setError(false);
+    console.log(userLogged);
   }
   return (
     <>
@@ -18,9 +23,12 @@ function LoggedScreen() {
         <img src={logo} className="logo"></img>
         <div className="logged midlogged">
           <div className="greeting">
-            <img src={avatar} alt="user" className="avatar" />
-            <h1>That's it, Elon!</h1>
-            <button onClick={()=> Logout()} className="btn-log"> <img src={door} alt="door" /> Logout</button>
+            <img src={userLogged?.avatar} alt="user" className="avatar" />
+            <h1>That's it, {userLogged?.name}!</h1>
+            <button onClick={() => Logout()} className="btn-log">
+              {" "}
+              <img src={door} alt="door" /> Logout
+            </button>
           </div>
         </div>
       </div>
