@@ -9,15 +9,16 @@ import {
   dataUserState,
 } from "../types/loginTypes";
 import arrow from "../images/arrow.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { login } from "../api/index";
 import errorLogo from "../images/error.png";
+import { useFirstRender } from "../components/useFirstRender";
 
 function LoginScreen() {
   const { credentials, setCredentials } = useContext(
     DataContext
   ) as credentialState;
-
+  const firstRender = useFirstRender();
   const { user, setUser } = useContext(DataContext) as userState;
   const { error, setError } = useContext(DataContext) as errorState;
   const { dataLogged, setDataLogged } = useContext(
@@ -27,23 +28,26 @@ function LoginScreen() {
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
     setCredentials(data);
-    const response = await login(credentials);
-
-    if (response.error) {
-      setError(true);
-      console.log(response.error);
-    } else {
-      setUser(true);
-      setDataLogged(response);
-      console.log(dataLogged);
-      console.log(response);
-    }
   };
 
-  // useEffect(() => {
+  useEffect(() => {
+    if (!firstRender) {
+      login(credentials).then(
+        (result) => {
+          if (result.error) {
+            setError(true);
+          } else {
+            setUser(true);
+            setDataLogged(result);
+          }
+        },
 
-  //   API();
-  // }, [onSubmit]);
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }, [firstRender, onSubmit]);
 
   return (
     <>
