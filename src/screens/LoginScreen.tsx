@@ -9,12 +9,14 @@ import {
   dataUserState,
 } from "../types/loginTypes";
 import arrow from "../images/arrow.png";
-import { useContext, useEffect } from "react";
+import loadImg from "../images/loader.svg";
+import { useContext, useEffect, useState } from "react";
 import { login } from "../api/index";
 import errorLogo from "../images/error.png";
 import { useFirstRender } from "../components/useFirstRender";
 
 function LoginScreen() {
+  const [loading, setLoading] = useState(true);
   const { credentials, setCredentials } = useContext(
     DataContext
   ) as credentialState;
@@ -28,6 +30,7 @@ function LoginScreen() {
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
     setCredentials(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -35,10 +38,12 @@ function LoginScreen() {
       login(credentials).then(
         (result) => {
           if (result.error) {
+            setLoading(true);
             setError(true);
           } else {
             setUser(true);
             setDataLogged(result);
+            setLoading(true);
           }
         },
 
@@ -104,10 +109,15 @@ function LoginScreen() {
                   Incorrect password
                 </h6>
               </div>
-
-              <button type="submit" value="submit" className="btn-log">
-                Login <img src={arrow} alt="arrow"></img>
-              </button>
+              {loading === true ? (
+                <button type="submit" value="submit" className="btn-log">
+                  Login <img src={arrow} alt="arrow"></img>
+                </button>
+              ) : (
+                <button type="submit" value="submit" className="btn-log">
+                  <img src={loadImg} alt="load" className="load"></img>
+                </button>
+              )}
             </form>
           </div>
         </div>
