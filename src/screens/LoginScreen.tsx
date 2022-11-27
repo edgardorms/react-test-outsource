@@ -14,6 +14,8 @@ import { useContext, useEffect, useState } from "react";
 import { login } from "../api/index";
 import errorLogo from "../images/error.png";
 import { useFirstRender } from "../components/useFirstRender";
+import { joinClassNames } from "../utils/joinClassNames";
+
 
 function LoginScreen() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,9 @@ function LoginScreen() {
   const { dataLogged, setDataLogged } = useContext(
     DataContext
   ) as dataUserState;
+  let loginStyle = joinClassNames(["login", "midlog"]);
+
+
 
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
@@ -58,7 +63,7 @@ function LoginScreen() {
     <>
       <div className="container">
         <img src={logo} className="logo"></img>
-        <div className="login midlog">
+        <div className={loginStyle}>
           <div className="welcome">
             <h1>Welcome, Stranger!</h1>
             <p className="logtext">

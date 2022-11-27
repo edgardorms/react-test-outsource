@@ -8,6 +8,8 @@ import {
 } from "../types/loginTypes";
 import { useContext } from "react";
 import { DataContext } from "../context/ContextProvider";
+import { joinClassNames } from "../utils/joinClassNames";
+
 
 function LoggedScreen() {
   const { user, setUser } = useContext(DataContext) as userState;
@@ -18,22 +20,28 @@ function LoggedScreen() {
   const { credentials, setCredentials } = useContext(
     DataContext
   ) as credentialState;
+  let loggedStyle = joinClassNames(["logged", "midlogged"]);
+
+  
 
   const userLogged = dataLogged.data;
   function Logout() {
+ 
+
     setUser(false);
     setError(false);
 setCredentials( {
   password: "",
   email: "",
 })
-    console.log(userLogged);
+    
+    
   }
   return (
     <>
       <div className="container">
         <img src={logo} className="logo"></img>
-        <div className="logged midlogged">
+        <div className={loggedStyle}>
           <div className="greeting">
             <img src={userLogged?.avatar} alt="user" className="avatar" />
             <h1>That's it, {userLogged?.name}!</h1>

@@ -9,6 +9,8 @@ import {
   logItems,
 } from "../types/loginTypes";
 
+
+
 const initialCredential: credentialState = {
   credentials: {
     password: "",
@@ -53,7 +55,7 @@ export const DataContextProvider = ({ children }: props) => {
         error,
         setError,
         dataLogged,
-        setDataLogged,
+        setDataLogged
       }}
     >
       {children}
