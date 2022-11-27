@@ -187,21 +187,14 @@ body {
   align-items: center;
 }
 
-
 .error-msg {
-  /* Paragraph/P6 */
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  /* identical to box height, or 154% */
 
   margin: 0px;
-
-  /* Negative/Alpha_100 */
-
   color: #ff0044;
 }
 .input-error {
@@ -274,17 +267,15 @@ body {
   pointer-events: none;
 }
 
-.load{
+.load {
   animation: spin 1s linear infinite;
- 
-
 }
 
 @keyframes spin {
   from {
-      transform:rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-      transform:rotate(360deg);
+    transform: rotate(360deg);
   }
 }

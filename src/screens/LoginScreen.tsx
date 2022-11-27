@@ -16,7 +16,6 @@ import errorLogo from "../images/error.png";
 import { useFirstRender } from "../components/useFirstRender";
 import { joinClassNames } from "../utils/joinClassNames";
 
-
 function LoginScreen() {
   const [loading, setLoading] = useState(true);
   const { credentials, setCredentials } = useContext(
@@ -29,8 +28,6 @@ function LoginScreen() {
     DataContext
   ) as dataUserState;
   let loginStyle = joinClassNames(["login", "midlog"]);
-
-
 
   const { register, handleSubmit } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {

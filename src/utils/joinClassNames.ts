@@ -4,6 +4,6 @@ export function joinClassNames(
   classNames: (string | undefined | null)[]
 ): string {
   // @TODO: implement me
- let joinedClasses = classNames.join(" ");
+  let joinedClasses = classNames.join(" ");
   return joinedClasses;
 }

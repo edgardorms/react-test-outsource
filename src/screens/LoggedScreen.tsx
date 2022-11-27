@@ -10,7 +10,6 @@ import { useContext } from "react";
 import { DataContext } from "../context/ContextProvider";
 import { joinClassNames } from "../utils/joinClassNames";
 
-
 function LoggedScreen() {
   const { user, setUser } = useContext(DataContext) as userState;
   const { error, setError } = useContext(DataContext) as errorState;
@@ -22,20 +21,14 @@ function LoggedScreen() {
   ) as credentialState;
   let loggedStyle = joinClassNames(["logged", "midlogged"]);
 
-  
-
   const userLogged = dataLogged.data;
   function Logout() {
- 
-
     setUser(false);
     setError(false);
-setCredentials( {
-  password: "",
-  email: "",
-})
-    
-    
+    setCredentials({
+      password: "",
+      email: "",
+    });
   }
   return (
     <>
