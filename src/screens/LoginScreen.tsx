@@ -29,7 +29,7 @@ function LoginScreen() {
   ) as dataUserState;
   let loginStyle = joinClassNames(["login", "midlog"]);
 
-  const { register, handleSubmit } = useForm<loginData>();
+  const { register, handleSubmit, formState: { errors } } = useForm<loginData>();
   const onSubmit: SubmitHandler<loginData> = async (data) => {
     setCredentials(data);
     setLoading(false);
@@ -76,10 +76,18 @@ function LoginScreen() {
                 <div className="input-container">
                   {/* input with pattern validation */}
                   <input
-                    {...register("email", {
-                      required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i
-                    })}
-                    type="email"
+                     {...register("email", {
+                    required: {
+                      value: true,
+                      message: "Please enter your email address",
+                    },
+                    pattern: {
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                    type="text"
                     className={error ? "input-error" : "input"}
                     placeholder="Email"
                   />
@@ -90,14 +98,17 @@ function LoginScreen() {
                 </div>
 
                 <h6 className={error ? "error-msg" : "hidden"}>
-                  Incorrect email
+                 {errors.email?.message}
                 </h6>
               </div>
               <div>
                 <div className="input-container">
                   <input
                     {...register("password", {
-                      required: true,
+                      required: {
+                        value: true,
+                        message: "Please enter your password",
+                      },
                     })}
                     type="password"
                     className={error ? "input-error" : "input"}
@@ -109,7 +120,7 @@ function LoginScreen() {
                   ></img>
                 </div>
                 <h6 className={error ? "error-msg" : "hidden"}>
-                  Incorrect password
+                {errors.password?.message  ? errors.password?.message : "Incorrect password"}
                 </h6>
               </div>
               {loading === true ? (
