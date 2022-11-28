@@ -74,9 +74,10 @@ function LoginScreen() {
             >
               <div>
                 <div className="input-container">
+                  {/* input with pattern validation */}
                   <input
                     {...register("email", {
-                      required: true,
+                      required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i
                     })}
                     type="email"
                     className={error ? "input-error" : "input"}
