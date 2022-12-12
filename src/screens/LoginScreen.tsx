@@ -22,8 +22,8 @@ function LoginScreen() {
     DataContext
   ) as credentialState;
   const firstRender = useFirstRender();
-  const { user, setUser } = useContext(DataContext) as userState;
-  const { error, setError } = useContext(DataContext) as errorState;
+  const { isUser, setIsUser } = useContext(DataContext) as userState;
+  const { isError, setIsError } = useContext(DataContext) as errorState;
   const { dataLogged, setDataLogged } = useContext(
     DataContext
   ) as dataUserState;
@@ -41,9 +41,9 @@ function LoginScreen() {
         (result) => {
           if (result.error) {
             setLoading(true);
-            setError(true);
+            setIsError(true);
           } else {
-            setUser(true);
+            setIsUser(true);
             setDataLogged(result);
             setLoading(true);
           }
@@ -63,17 +63,17 @@ function LoginScreen() {
         <div className={loginStyle}>
           <div className="welcome">
             <h1>Welcome, Stranger!</h1>
-            <p className="logtext">
+            <p className="logText">
               Please log in this form if you wish to pass the exam.
             </p>
           </div>
           <div>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className={error ? "form-error" : "form"}
+              className={isError ? "formError" : "form"}
             >
               <div>
-                <div className="input-container">
+                <div className="inputContainer">
                   {/* input with pattern validation */}
                   <input
                      {...register("email", {
@@ -88,21 +88,21 @@ function LoginScreen() {
                     },
                   })}
                     type="text"
-                    className={error ? "input-error" : "input"}
+                    className={isError ? "inputError" : "input"}
                     placeholder="Email"
                   />
                   <img
                     src={errorLogo}
-                    className={error ? "cross" : "hidden"}
+                    className={isError ? "cross" : "hidden"}
                   ></img>
                 </div>
 
-                <h6 className={error ? "error-msg" : "hidden"}>
+                <h6 className={isError ? "errorMessage" : "hidden"}>
                  {errors.email?.message}
                 </h6>
               </div>
               <div>
-                <div className="input-container">
+                <div className="inputContainer">
                   <input
                     {...register("password", {
                       required: {
@@ -111,24 +111,24 @@ function LoginScreen() {
                       },
                     })}
                     type="password"
-                    className={error ? "input-error" : "input"}
+                    className={isError ? "inputError" : "input"}
                     placeholder="Password"
                   />
                   <img
                     src={errorLogo}
-                    className={error ? "cross" : "hidden"}
+                    className={isError ? "cross" : "hidden"}
                   ></img>
                 </div>
-                <h6 className={error ? "error-msg" : "hidden"}>
+                <h6 className={isError ? "errorMessage" : "hidden"}>
                 {errors.password?.message  ? errors.password?.message : "Incorrect password"}
                 </h6>
               </div>
               {loading === true ? (
-                <button type="submit" value="submit" className="btn-log">
+                <button type="submit" value="submit" className="buttonLog">
                   Login <img src={arrow} alt="arrow"></img>
                 </button>
               ) : (
-                <button type="submit" value="submit" className="btn-log">
+                <button type="submit" value="submit" className="buttonLog">
                   <img src={loadImg} alt="load" className="load"></img>
                 </button>
               )}

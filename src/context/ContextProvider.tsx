@@ -6,7 +6,7 @@ import {
   errorState,
   dataUser,
   dataUserState,
-  logItems,
+  
 } from "../types/loginTypes";
 
 const initialCredential: credentialState = {
@@ -39,19 +39,19 @@ export const DataContextProvider = ({ children }: props) => {
     initialCredential
   );
 
-  const [user, setUser] = useState<userState | null>(null);
-  const [error, setError] = useState<errorState | null>(null);
+  const [isUser, setIsUser] = useState<userState | null>(null);
+  const [isError, setIsError] = useState<errorState | null>(null);
   const [dataLogged, setDataLogged] = useState<dataUserState>(initialDataUser);
 
   return (
     <DataContext.Provider
       value={{
-        user,
-        setUser,
+        isUser,
+        setIsUser,
         credentials,
         setCredentials,
-        error,
-        setError,
+        isError,
+        setIsError,
         dataLogged,
         setDataLogged,
       }}

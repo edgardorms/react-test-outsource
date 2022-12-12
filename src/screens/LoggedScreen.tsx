@@ -11,20 +11,20 @@ import { DataContext } from "../context/ContextProvider";
 import { joinClassNames } from "../utils/joinClassNames";
 
 function LoggedScreen() {
-  const { user, setUser } = useContext(DataContext) as userState;
-  const { error, setError } = useContext(DataContext) as errorState;
+  const { isUser, setIsUser } = useContext(DataContext) as userState;
+  const { isError, setIsError } = useContext(DataContext) as errorState;
   const { dataLogged, setDataLogged } = useContext(
     DataContext
   ) as dataUserState;
-  const { credentials, setCredentials } = useContext(
+  const {  setCredentials } = useContext(
     DataContext
   ) as credentialState;
   let loggedStyle = joinClassNames(["logged", "midlogged"]);
 
   const userLogged = dataLogged.data;
   function Logout() {
-    setUser(false);
-    setError(false);
+    setIsUser(false);
+    setIsError(false);
     setCredentials({
       password: "",
       email: "",
@@ -38,7 +38,7 @@ function LoggedScreen() {
           <div className="greeting">
             <img src={userLogged?.avatar} alt="user" className="avatar" />
             <h1>That's it, {userLogged?.name}!</h1>
-            <button onClick={() => Logout()} className="btn-log">
+            <button onClick={() => Logout()} className="buttonLog">
               {" "}
               <img src={door} alt="door" /> Logout
             </button>

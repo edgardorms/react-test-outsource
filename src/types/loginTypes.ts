@@ -21,13 +21,13 @@ export type dataUserState = {
   setDataLogged: (value: dataUser) => void;
 };
 export type userState = {
-  user: boolean;
-  setUser: (open: boolean) => void;
+  isUser: boolean;
+  setIsUser: (open: boolean) => void;
   prevState: null;
 };
 export type errorState = {
-  error: boolean;
-  setError: (open: boolean) => void;
+  isError: boolean;
+  setIsError: (open: boolean) => void;
   prevState: null;
 };
 

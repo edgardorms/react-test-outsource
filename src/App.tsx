@@ -5,9 +5,9 @@ import LoginScreen from "./screens/LoginScreen";
 import { userState } from "./types/loginTypes";
 
 function App() {
-  const { user, setUser } = useContext(DataContext) as userState;
+  const { isUser } = useContext(DataContext) as userState;
 
-  return user ? <LoggedScreen /> : <LoginScreen />;
+  return isUser ? <LoggedScreen /> : <LoginScreen />;
 }
 
 export default App;
